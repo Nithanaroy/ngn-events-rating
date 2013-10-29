@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  details: MyText
+  place: MyString
+  from: 2013-10-27 22:24:17
+  to: 2013-10-27 22:24:17
+
+two:
+  name: MyString
+  details: MyText
+  place: MyString
+  from: 2013-10-27 22:24:17
+  to: 2013-10-27 22:24:17

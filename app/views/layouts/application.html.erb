@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Events</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <%= render :partial => 'layouts/navbar' %>
+  <%= render :partial => 'layouts/breadcrumb' %>
+
+  <%= yield %>
+  <%= render :partial => 'layouts/footer' %>
+</div>
+</body>
+</html>
