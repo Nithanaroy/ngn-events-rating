@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.page(params[:page]).per(1)
   end
 
   # GET /events/1
@@ -62,19 +62,21 @@ class EventsController < ApplicationController
   end
 
   def add_rating
-    @event_ratings = EventsRatings.new
-    puts "Params: #{params}, Event: #{@event}"
+    puts "Params #{params}"
+    event = Event.find(params[:id])
+    event.ratings << EventsRatings.new(:rating => params[:rating])
+    event.save
     render :nothing => true
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :details, :place, :from, :to)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:name, :details, :place, :from, :to)
+  end
 end

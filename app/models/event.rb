@@ -10,6 +10,6 @@ class Event < ActiveRecord::Base
 
   def rating
     ratings = self.ratings.map { |r| r.rating }
-    ratings.sum / ratings.size
+    (ratings.sum / Float(ratings.size)).round(1)
   end
 end

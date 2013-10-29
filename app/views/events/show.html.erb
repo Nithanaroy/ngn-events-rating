@@ -1,34 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div id="show">
+  <% javascript_include_tag "show" %>
+  <p id="notice"><%= notice %></p>
 
+  <p>
+    <input type="text" id="rating" value=""> <!-- TODO: Should populate based on user -->
+  </p>
 
-<p>
-  <input type="text" id="rating" value=""> <!-- TODO: Should populate based on user -->
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @event.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+  <p>
+    <strong>Details:</strong>
+    <%= @event.details %>
+  </p>
 
-<p>
-  <strong>Details:</strong>
-  <%= @event.details %>
-</p>
+  <p>
+    <strong>Place:</strong>
+    <%= @event.place %>
+  </p>
 
-<p>
-  <strong>Place:</strong>
-  <%= @event.place %>
-</p>
+  <p>
+    <strong>From:</strong>
+    <%= @event.from %>
+  </p>
 
-<p>
-  <strong>From:</strong>
-  <%= @event.from %>
-</p>
+  <p>
+    <strong>To:</strong>
+    <%= @event.to %>
+  </p>
 
-<p>
-  <strong>To:</strong>
-  <%= @event.to %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Back', events_path %>
+</div>
