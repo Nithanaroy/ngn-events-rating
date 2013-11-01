@@ -1,0 +1,27 @@
+Ruby version
+v2
+
+System dependencies
+None
+
+Configuration
+RVM
+Ruby v2
+Rails v4
+MySQL
+
+Database creation
+rake db:migrate after clone
+
+Database initialization
+Can be empty
+
+How to run the test suite
+No tests as of now
+
+Services (job queues, cache servers, search engines, etc.)
+None
+
+Deployment instructions
+start the server by rails s
+go to browser and check the running app
