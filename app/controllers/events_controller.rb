@@ -4,7 +4,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.page(params[:page]).per(1)
+    @search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').search(params[:q])
+    if (params[:q].nil?)
+      @events = @search.result(:distinct => true).order('created_at DESC').page(params[:page]).per(10)
+    else
+      @events = @search.result(:distinct => true).page(params[:page]).per(10)
+    end
   end
 
   # GET /events/1
