@@ -4,11 +4,22 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').search(params[:q])
+    @search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as ra' ).group(:event_id).search(params[:q])
+    #@search = Event.includes(:ratings).joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').search(params[:q])
+    #@search = Event.includes(:ratings).search(params[:q])
+    #if (params[:q].nil?)
+    #  @events = @search.result(:distinct => true).order('created_at DESC').page(params[:page]).per(2)
+    #else
+    #  @events = @search.result(:distinct => true).page(params[:page]).per(2)
+    #end
+
+    #@search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as ra').group(:event_id).search(params[:q])
+    #puts "Search Sorts #{@search.sorts}"
+    @events = @search.result(:distinct => true).page(params[:page]).per(2)
     if (params[:q].nil?)
-      @events = @search.result(:distinct => true).order('created_at DESC').page(params[:page]).per(10)
-    else
-      @events = @search.result(:distinct => true).page(params[:page]).per(10)
+      @events = @events.order('created_at DESC')
+    elsif (params[:q] and params[:q][:s].index(/ra (asc|desc)/)) #TODO Make Ransack do this for associated table
+      @events = @events.order(params[:q][:s])
     end
   end
 

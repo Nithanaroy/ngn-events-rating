@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:date_time_weekday] = "%b %d, %Y. %H:%M %p (%a)"
