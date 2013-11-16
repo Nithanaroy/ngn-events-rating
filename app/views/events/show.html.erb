@@ -1,36 +1,61 @@
-<div id="show">
+<div id="event-show">
   <% javascript_include_tag "show" %>
-  <p id="notice"><%= notice %></p>
 
-  <p>
-    <input type="text" id="rating" value=""> <!-- TODO: Should populate based on user -->
-  </p>
+  <div id="notice"></div>
 
-  <p>
-    <strong>Name:</strong>
+  <h2 class="pull-left">
     <%= @event.name %>
-  </p>
+  </h2>
 
-  <p>
-    <strong>Details:</strong>
-    <%= @event.details %>
-  </p>
+  <div class="rating pull-right rmargin10">                              <!-- TODO: Should populate based on user -->
+    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
+    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
+    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
+    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
+    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
+  </div>
 
-  <p>
-    <strong>Place:</strong>
-    <%= @event.place %>
-  </p>
+  <div class="clearfix"></div>
 
-  <p>
-    <strong>From:</strong>
-    <%= @event.from %>
-  </p>
+  <div class="media">
 
-  <p>
-    <strong>To:</strong>
-    <%= @event.to %>
-  </p>
+    <div class="pull-left">
+      <img src="/event_images/<%= @event.image_url || 'up.jpg' %>"
+           alt="<%= @event.name.upcase %>" width="400px"
+           class="media-object img-thumbnail img-responsive "/>
+    </div>
 
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Back', events_path %>
+    <div class="media-body">
+      <h4 class="media-heading">Details</h4>
+      <%= @event.details %>
+
+      <hr/>
+
+      <h4 class="media-heading">Place</h4>
+      <%= @event.place %>
+
+      <hr/>
+
+      <h4 class="media-heading">From</h4>
+      <%= @event.from.to_formatted_s(:date_time_weekday) %>
+
+      <hr/>
+
+      <h4 class="media-heading">To</h4>
+      <%= @event.to.to_formatted_s(:date_time_weekday) %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-default btn-lg voted" title="Going!">
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+    </button>
+    <button type="button" class="btn btn-default btn-lg" title="Not Going!">
+      <span class="glyphicon glyphicon-thumbs-down"></span>
+    </button>
+  </div>
+
+  <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-link' %> |
+  <%= link_to 'Back', events_path, :class => 'btn btn-link' %>
 </div>

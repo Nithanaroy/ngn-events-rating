@@ -1,0 +1,6 @@
+
+<!--'type' can be either of ['success', 'info', 'warning', 'danger']-->
+
+<% type ||= 'info' %>
+<% type = 'info' unless %w(success info warning danger).index(type) %>
+<p class="alert alert-<%= type %>"><%= notice %></p>

@@ -1,0 +1,28 @@
+.rmargin10 {
+    margin-right: 10px;
+}
+
+.tmargin10 {
+    margin-top: 10px;
+}
+
+.bmargin10 {
+    margin-bottom: 10px;
+}
+
+.lmargin10 {
+    margin-left: 10px;
+}
+
+.rating span.glyphicon {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    margin-left: -5px;
+}
+
+.btn-default.voted {
+    color: #333333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}

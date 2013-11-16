@@ -10,13 +10,7 @@
     <th><%= sort_link @search, :place %></th>
     <th><%= sort_link @search, :from %></th>
     <th><%= sort_link @search, :to %></th>
-    <th><%= sort_link @search, :ra %></th>
-    <!--<th>Details</th>-->
-    <!--<th>Place</th>-->
-    <!--<th>From</th>-->
-    <!--<th>To</th>-->
-    <!--<th>Rating</th>-->
-    <th></th>
+    <th><%= sort_link @search, :rating %></th>
     <th></th>
     <th></th>
   </tr>
@@ -25,46 +19,18 @@
   <tbody>
   <% @events.each do |event| %>
       <tr>
-        <td><%= event.name %></td>
+        <td><%= link_to event.name, event %></td>
         <td><%= event.details %></td>
         <td><%= event.place %></td>
         <td><%= event.from.to_formatted_s(:date_time_weekday) %></td>
         <td><%= event.to.to_formatted_s(:date_time_weekday) %></td>
-        <% puts event.rating %>
-        <td><%= event.ra %></td>
-        <td><%= link_to 'Show', event, :class => "btn btn-success" %></td>
+        <td><%= event.rating.round(2) %></td>
         <td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
-
-<!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<%= render :partial => 'layouts/pagination' %>
 
 <br>
 
