@@ -95,19 +95,19 @@ class EventsController < ApplicationController
       elsif (action == :create)
         create_helper
       end
-    #rescue TooBigFile => e
-    #  @type = 'danger' # for error notice
-    #  flash[:notice] = e.message
-    #  render action: 'new'
-    #rescue InvalidFile => e
-    #  flash[:notice] = e.message
-    #  @type = 'danger' # for error notice
-    #  render action: 'new'
-    #rescue Exception => e
-    #  puts "Whats the matter: "
-    #  flash[:notice] = GlobalConstants::GENERIC_ERROR_MSG
-    #  @type = 'danger' # for error notice
-    #  render action: 'show'
+    rescue TooBigFile => e
+      @type = 'danger' # for error notice
+      flash[:notice] = e.message
+      render action: 'new'
+    rescue InvalidFile => e
+      flash[:notice] = e.message
+      @type = 'danger' # for error notice
+      render action: 'new'
+    rescue Exception => e
+      puts "Whats the matter: "
+      flash[:notice] = GlobalConstants::GENERIC_ERROR_MSG
+      @type = 'danger' # for error notice
+      render action: 'show'
     end
   end
 

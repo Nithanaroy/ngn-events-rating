@@ -36,6 +36,8 @@ gem 'kaminari'
 
 gem 'ransack'
 
+gem 'devise', '3.0.0.rc' # comaptible with rails 4
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
