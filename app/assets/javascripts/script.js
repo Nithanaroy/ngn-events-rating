@@ -8,3 +8,9 @@ function notify_error(notice_ref, text) {
     var html = '<p class="alert alert-danger">' + text + '</p>';
     $(notice_ref).fadeOut(100).html(html).fadeIn(100);
 }
+
+window.onload = function () {
+    document.getElementById('theater').onclick = function(event) {
+        return false;
+    };
+}

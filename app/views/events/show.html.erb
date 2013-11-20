@@ -1,29 +1,34 @@
 <div id="event-show">
   <% javascript_include_tag "show" %>
 
+  <%= render partial: 'layouts/notice', locals: {type: @type} %>
   <div id="notice"></div>
 
   <h2 class="pull-left">
     <%= @event.name %>
   </h2>
 
-  <div class="rating pull-right rmargin10">                              <!-- TODO: Should populate based on user -->
-    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
-    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
-    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
-    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
-    <span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>
-  </div>
+  <!--<div class="rating pull-right rmargin10">                              -->
+  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
+  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
+  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
+  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
+  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
+  <!--</div>-->
 
   <div class="clearfix"></div>
 
   <div class="media">
 
-    <div class="pull-left">
-      <img src="/event_images/<%= @event.image_url || 'up.jpg' %>"
-           alt="<%= @event.name.upcase %>" width="400px"
-           class="media-object img-thumbnail img-responsive "/>
-    </div>
+    <% if @event.image_url %>
+        <div class="pull-left" id="theater">
+          <a href="<%= @event.image_url %>">
+            <img src="<%= @event.image_url %>?<%= Time.now.to_i %>"
+                 alt="<%= @event.name.upcase %>"
+                 class="media-object img-thumbnail img-responsive " style="max-width: 400px;"/>
+          </a>
+        </div>
+    <% end %>
 
     <div class="media-body">
       <h4 class="media-heading">Details</h4>
@@ -46,6 +51,8 @@
     </div>
   </div>
   <div class="clearfix"></div>
+
+  <hr/>
 
   <div class="btn-group">
     <button type="button" class="btn btn-default btn-lg voted" title="Going!">

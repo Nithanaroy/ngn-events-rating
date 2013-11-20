@@ -12,8 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require jansy.bootstrap.min
+//= require jquery-ui-1.10.3.custom.min
+//= require jquery-ui-sliderAccess
+//= require jquery-ui-timepicker-addon
 //= require script
+//= require holder
 //= require_tree .
 
 

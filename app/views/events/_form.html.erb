@@ -1,4 +1,4 @@
-<%= form_for(@event) do |f| %>
+<%= form_for @event, :html => {:role => 'form'} do |f| %>
     <% if @event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,32 +11,47 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :name %>
-      <br>
-      <%= f.text_field :name %>
+    <div class="media">
+
+      <div class="fileinput fileinput-new pull-left" data-provides="fileinput">
+        <div class="fileinput-new thumbnail" style="max-width: 400px;">
+          <img src="<%= @event.image_url || 'holder.js/300x300' %>" alt="<%= @event.name || '...' %>">
+        </div>
+        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 400px; max-height: 300px; min-width: 200px"></div>
+        <div>
+          <span class="btn btn-default btn-file">
+            <span class="fileinput-new">Select image</span>
+            <span class="fileinput-exists">Change</span>
+            <%= f.file_field :picture %>
+          </span>
+          <a class="btn btn-warning fileinput-new my-fileinput">Remove</a>
+          <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Remove</a>
+        </div>
+      </div>
+      <input type="hidden" name="event[remove_image?]" id="event_remove_image" /> <!-- Some way to send info to server that image is intended to be deleted TODO -->
+
+      <div class="media-body">
+        <h4 class="media-heading"><%= f.label :name %></h4>
+        <%= f.text_field :name, :class => 'form-control', :autofocus => 'autofocus' %>
+
+        <h4 class="media-heading"><%= f.label :details %></h4>
+        <%= f.text_area :details, :class => 'form-control' %>
+
+        <h4 class="media-heading"><%= f.label :place %></h4>
+        <%= f.text_field :place, :class => 'form-control' %>
+
+        <h4 class="media-heading"><%= f.label :from %></h4>
+        <%= f.text_field :from, :value => @event.from.to_formatted_s(:edit_form), :class => 'form-control' %>
+
+        <h4 class="media-heading"><%= f.label :to %></h4>
+        <%= f.text_field :to, :value => @event.to.to_formatted_s(:edit_form), :class => 'form-control' %>
+      </div>
+
+      <div class="clearfix"></div>
     </div>
-    <div class="field">
-      <%= f.label :details %>
-      <br>
-      <%= f.text_area :details %>
-    </div>
-    <div class="field">
-      <%= f.label :place %>
-      <br>
-      <%= f.text_field :place %>
-    </div>
-    <div class="field">
-      <%= f.label :from %>
-      <br>
-      <%= f.datetime_select :from %>
-    </div>
-    <div class="field">
-      <%= f.label :to %>
-      <br>
-      <%= f.datetime_select :to %>
-    </div>
+
+    <hr/>
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Save', :class => 'btn btn-default' %>
     </div>
 <% end %>
