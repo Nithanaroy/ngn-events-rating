@@ -3,5 +3,5 @@ module GlobalConstants
   GENERIC_ERROR_MSG = 'Something went wrong. We are working on it'
   EVENT_IMAGES_PATH = Rails.public_path.join('event_images')
 
-  ADMIN = '123'
+  ADMIN = 'intuit01'
 end

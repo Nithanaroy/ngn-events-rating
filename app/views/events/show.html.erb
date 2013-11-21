@@ -6,6 +6,8 @@
     <%= @event.name %>
   </h2>
 
+  <%= render 'layouts/thumbs' %>
+
   <div class="clearfix"></div>
 
   <div class="media">
@@ -44,7 +46,6 @@
 
   <hr/>
 
-  <%= render 'layouts/thumbs' %>
 
   <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
       <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-link' %> |

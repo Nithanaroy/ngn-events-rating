@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_logged_in?
 
   def is_logged_in?
-    return true # if params[:uid] and params[:uid] == GlobalConstants::ADMIN
+    return true if params[:uid] and params[:uid] == GlobalConstants::ADMIN
     return false
   end
   # TODO: END remove these lines after actual validation

@@ -31,7 +31,6 @@ class EventsController < ApplicationController
     elsif (params[:q] and params[:q][:s].index(/going (asc|desc)/)) #TODO Make Ransack do this for associated table
       @events = @events.order(params[:q][:s])
     end
-    puts "EV ME #{@events.inspect}. \n\nME #{@events.methods}"
   end
 
   # GET /events/1
