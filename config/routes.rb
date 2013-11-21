@@ -1,4 +1,5 @@
 Events::Application.routes.draw do
+  devise_for :users, :path_names => {:sign_up => 'register'}
   resources :events
   post 'events/:id/rating' => 'events#add_rating'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -41,7 +42,7 @@ Events::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
