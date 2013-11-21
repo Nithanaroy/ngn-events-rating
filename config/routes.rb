@@ -1,6 +1,7 @@
 Events::Application.routes.draw do
   resources :events
   post 'events/:id/rating' => 'events#add_rating'
+  post 'events/:id/going' => 'events#going'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

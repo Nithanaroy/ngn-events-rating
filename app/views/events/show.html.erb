@@ -1,6 +1,4 @@
 <div id="event-show">
-  <% javascript_include_tag "show" %>
-
   <%= render partial: 'layouts/notice', locals: {type: @type} %>
   <div id="notice"></div>
 
@@ -8,21 +6,13 @@
     <%= @event.name %>
   </h2>
 
-  <!--<div class="rating pull-right rmargin10">                              -->
-  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
-  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
-  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
-  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
-  <!--<span class="medium-glyphicons glyphicon glyphicon-star-empty"></span>-->
-  <!--</div>-->
-
   <div class="clearfix"></div>
 
   <div class="media">
 
     <% if @event.image_url %>
         <div class="pull-left" id="theater">
-          <a href="<%= @event.image_url %>">
+          <a href="<%= @event.image_url %>" target="_blank">
             <img src="<%= @event.image_url %>?<%= Time.now.to_i %>"
                  alt="<%= @event.name.upcase %>"
                  class="media-object img-thumbnail img-responsive " style="max-width: 400px;"/>
@@ -54,15 +44,10 @@
 
   <hr/>
 
-  <div class="btn-group">
-    <button type="button" class="btn btn-default btn-lg voted" title="Going!">
-      <span class="glyphicon glyphicon-thumbs-up"></span>
-    </button>
-    <button type="button" class="btn btn-default btn-lg" title="Not Going!">
-      <span class="glyphicon glyphicon-thumbs-down"></span>
-    </button>
-  </div>
+  <%= render 'layouts/thumbs' %>
 
-  <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-link' %> |
-  <%= link_to 'Back', events_path, :class => 'btn btn-link' %>
+  <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+      <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-link' %> |
+      <%= link_to 'Back', events_path, :class => 'btn btn-link' %>
+  <% end %>
 </div>

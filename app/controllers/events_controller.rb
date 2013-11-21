@@ -2,6 +2,7 @@ require 'exceptions'
 
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, only: [:edit, :new]
 
   def welcome
     render :file => "#{Rails.root}/public/welcome.html"
@@ -10,7 +11,10 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as rating').group(:id).search(params[:q])
+    events = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'COUNT(going) as going').group(:id)
+    events = events.where('name LIKE ?', "%#{params[:name]}%") if params[:name]
+    @search = events.search(params[:q])
+    #@search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as rating').group(:id).search(params[:q])
     #@search = Event.includes(:ratings).joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').search(params[:q])
     #@search = Event.includes(:ratings).search(params[:q])
     #if (params[:q].nil?)
@@ -23,10 +27,11 @@ class EventsController < ApplicationController
     #puts "Search Sorts #{@search.sorts}"
     @events = @search.result(:distinct => true).page(params[:page]).per(2)
     if (params[:q].nil?)
-      @events = @events.order('created_at DESC')
-    elsif (params[:q] and params[:q][:s].index(/rating (asc|desc)/)) #TODO Make Ransack do this for associated table
+      @events = @events.order(created_at: :desc)
+    elsif (params[:q] and params[:q][:s].index(/going (asc|desc)/)) #TODO Make Ransack do this for associated table
       @events = @events.order(params[:q][:s])
     end
+    puts "EV ME #{@events.inspect}. \n\nME #{@events.methods}"
   end
 
   # GET /events/1
@@ -77,10 +82,34 @@ class EventsController < ApplicationController
     end
   end
 
+  def going
+    event = Event.find(params[:id])
+    event.ratings << EventsRatings.new(:going => params[:going])
+    if event.save
+      flash[:notice] = 'Saved!'
+      render :partial => 'layouts/notice', locals: {type: 'success'}
+    else
+      flash[:notice] = 'Could not save. Please try again!'
+      render :partial => 'layouts/notice', locals: {type: 'error'}
+    end
+  end
+
+  # ---------------------------------
+  # To be moved to helper
+  # ---------------------------------
+
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def authenticate
+    unless is_logged_in?
+      flash[:error] = 'YOU DONT HAVE PERMISSIONS TO ACCESS THIS PAGE!'
+      render :file => '/public/401.html'
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -104,7 +133,6 @@ class EventsController < ApplicationController
       @type = 'danger' # for error notice
       render action: 'new'
     rescue Exception => e
-      puts "Whats the matter: "
       flash[:notice] = GlobalConstants::GENERIC_ERROR_MSG
       @type = 'danger' # for error notice
       render action: 'show'
@@ -115,7 +143,8 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.transaction do
       respond_to do |format|
-        if @event.save!
+        if @event.save
+          @event.reload
           upload_or_delete(@event.id)
           format.html { redirect_to @event, notice: 'Event was successfully created.' }
           format.json { render action: 'show', status: :created, location: @event }
@@ -160,4 +189,5 @@ class EventsController < ApplicationController
       File.delete(abs_filepath) if File.exists? abs_filepath
     end
   end
+
 end

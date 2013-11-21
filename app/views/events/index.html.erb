@@ -1,5 +1,10 @@
 <div class="page-header">
-  <h1>Listing Events</h1>
+  <% unless params[:name].nil? %>
+      <h3>Search Result: Found <%= @events.total_count %> event(s)</h3>
+      <%= link_to 'Show all', events_url %>
+  <% else %>
+      <h3>Listing Events</h3>
+  <% end %>
 </div>
 
 <%= paginate @events if @events %>
@@ -12,9 +17,11 @@
     <th><%= sort_link @search, :place %></th>
     <th><%= sort_link @search, :from %></th>
     <th><%= sort_link @search, :to %></th>
-    <th><%= sort_link @search, :rating %></th>
-    <th></th>
-    <th></th>
+    <th><%= sort_link @search, :going, '# Going' %></th>
+    <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+        <th></th>
+        <th></th>
+    <% end %>
   </tr>
   </thead>
 
@@ -26,13 +33,18 @@
         <td><%= event.place %></td>
         <td><%= event.from.to_formatted_s(:date_time_weekday) %></td>
         <td><%= event.to.to_formatted_s(:date_time_weekday) %></td>
-        <td><%= event.rating.round(2) if event.rating %></td>
-        <td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
+        <td><%= event.going if event.going > 0 %></td>
+        <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+            <td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" %></td>
+            <td><%= link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
+        <% end %>
       </tr>
   <% end %>
   </tbody>
 </table>
 
-<br>
-<%= link_to 'New Event', new_event_path, :class => "btn btn-success" %>
+<br/>
+
+<% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+    <%= link_to 'New Event', new_event_path, :class => "btn btn-success" %>
+<% end %>

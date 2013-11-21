@@ -13,20 +13,23 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">We Care <span class="badge">42</span></a></li>
-      <li><a href="#">NGN <span class="badge">66</span></a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Google +</a></li>
-        </ul>
-      </li>
+      <!--<li class="active"><a href="#">We Care <span class="badge">42</span></a></li>-->
+      <!--<li><a href="#">NGN <span class="badge">66</span></a></li>-->
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Facebook</a></li>
+      <li><a href="#">Google +</a></li>
+      <!--<li class="dropdown">-->
+        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>-->
+        <!--<ul class="dropdown-menu">-->
+          <!--<li><a href="#">Twitter</a></li>-->
+          <!--<li><a href="#">Facebook</a></li>-->
+          <!--<li><a href="#">Google +</a></li>-->
+        <!--</ul>-->
+      <!--</li>-->
     </ul>
-    <form class="navbar-form navbar-right" role="search">
+    <form class="navbar-form navbar-right" role="search" action="/events">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
+        <input type="text" class="form-control" placeholder="Search" name="name" value="<%= params[:name] %>">
       </div>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>

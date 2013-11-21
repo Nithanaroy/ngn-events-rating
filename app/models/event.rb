@@ -1,6 +1,11 @@
 class Event < ActiveRecord::Base
   before_destroy :delete_image
 
+  validates :name, presence: {:message => ': can\'t be blank'}
+  validates :place, presence: {:message => ': can\'t be blank'}
+  validates :from, presence: {:message => ': can\'t be blank'}
+  validates :to, presence: {:message => ': can\'t be blank'}
+
   def initialize(params=nil)
     super(params)
     # Make it a whole day event by default
