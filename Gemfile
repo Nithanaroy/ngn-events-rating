@@ -32,6 +32,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'execjs'
+gem 'therubyracer'
+
 gem 'ruby-openid'
 gem 'open_id_authentication'
 
