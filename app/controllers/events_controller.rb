@@ -84,7 +84,7 @@ class EventsController < ApplicationController
   def going
     event = Event.find(params[:id])
     event.ratings << EventsRatings.new(:going => params[:going])
-    if event.save
+    if event.save!
       flash[:notice] = 'Saved!'
       render :partial => 'layouts/notice', locals: {type: 'success'}
     else

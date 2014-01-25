@@ -4,7 +4,6 @@
   <title>Events</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,8 +11,6 @@
   <%= render :partial => 'layouts/navbar' %>
   <%= render :partial => 'layouts/breadcrumb' %>
 
-  <ipp:login href="http://localhost:3000/events/" type="horizontal"></ipp:login>
-  
   <%= yield %>
   <%= render :partial => 'layouts/footer' %>
 </div>

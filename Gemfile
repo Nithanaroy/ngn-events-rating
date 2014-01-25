@@ -35,14 +35,12 @@ end
 gem 'execjs'
 gem 'therubyracer'
 
-gem 'ruby-openid'
-gem 'open_id_authentication'
-
 gem 'kaminari'
-
 gem 'ransack'
-
-gem 'devise', '3.0.0.rc' # comaptible with rails 4
+# gem 'omniauth' #, '0.3.2'
+# gem "oa-openid"
+# gem 'mongrel', '1.2.0.pre2'
+gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
