@@ -8,7 +8,7 @@ class Authorization < ActiveRecord::Base
 	end
 
 	def self.create_from_hash(hash, user = nil)
-		puts "Steps 2 \n\n USER #{user.to_yaml}"
+		# puts "Steps 2 \n\n USER #{user.to_yaml}"
 		user = User.find_or_create_from_hash!(hash) unless user
 		Authorization.create(:user => user, :uid => hash['uid'], :provider => hash['provider'])
 	end

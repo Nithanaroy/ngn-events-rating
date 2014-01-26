@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
 	def self.find_or_create_from_hash!(hash)
 		# puts hash.to_yaml # for debugging
-		puts "Step 3"
+		# puts "Step 3"
 		user_details = {
 			:name => nil,
 			:email => nil,
