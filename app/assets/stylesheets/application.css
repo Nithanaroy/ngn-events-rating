@@ -9,8 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require jansy.bootstrap.min
+ 
  *= require bootstrap
+ *= require jasny-bootstrap_for_fileupload
+ *= require bootstrap-theme.min
  *= require jquery-ui-1.10.3.custom.min
  *= require jquery-ui-timepicker-addon
  *= require styles

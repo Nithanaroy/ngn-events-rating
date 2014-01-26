@@ -18,13 +18,12 @@ $(function() {
             data: {"going": going},
             success: function (data, ui) {
                 update_notice($("#event-show #notice"), data);
-                $(clicked_button).addClass(voted_class);
-                disable_thumbs();
-            },
-            error: function () {
-                notify_error($("#event-show #notice"), generic_error_msg);
                 clear_thumbs_vote();
-                enable_thumbs();
+                $(clicked_button).addClass(voted_class);
+            },
+            error: function (error, ui) {
+                handle_ajax_error(error)                
+                clear_thumbs_vote();
             }
         });
     });

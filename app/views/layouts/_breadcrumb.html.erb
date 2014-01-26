@@ -1,4 +1,39 @@
+<div>
 <ol class="breadcrumb">
   <li><a href="/">Home</a></li>
   <li><a href="/<%= params[:controller] %>"><%= params[:controller].titleize %></a></li>
+  
+  <% unless signed_in? %>
+  <li class='pull-right'>
+  	<a data-toggle="modal" data-target="#signinModal" href="javascript:void(0)">Sign In</a>
+  </li>
+  <% else %>
+  <li class='pull-right'><%= render :partial => '/sessions/success_login' %>
+  	<small>
+  		[ <%= link_to 'Sign Out', {:controller => 'sessions', :action => 'destroy'}, 
+  			{:method => :delete, :confirm => 'Are you sure?' } %> ]
+  	</small>
+  </li>
+  <% end %>
+
 </ol>
+</div>
+
+<% unless signed_in? %>
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Multiple ways to sign in</h4>
+      </div>
+      <div class="modal-body">
+        <%= render :partial => 'sessions/oauth_buttons' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

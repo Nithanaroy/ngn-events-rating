@@ -1,10 +1,15 @@
 <!--'type' can be either of ['success', 'info', 'warning', 'danger']-->
 
-<% if type %>
-    <% type = 'info' unless %w(success info warning danger).index(type) %>
-    <p class="alert alert-<%= type %>"><%= notice %></p>
-<% end %>
+<% unless notice.blank? %>
+	<% type ||= flash[:type] %>
+	<% type ||= 'info' %>
+	<% type = 'info' unless %w(success info warning danger).include?(type) %>
+	<p class="alert alert-<%= type %>">
+		<%= notice %>
+		<a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+	</p>
 
-<script type="text/javascript">
-  $(window).scrollTop(0);
-</script>
+	<script type="text/javascript">
+	  $(window).scrollTop(0);
+	</script>
+<% end %>

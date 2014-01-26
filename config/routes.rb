@@ -1,7 +1,11 @@
 Events::Application.routes.draw do
   resources :events
+  resources :sessions
   post 'events/:id/rating' => 'events#add_rating'
   post 'events/:id/going' => 'events#going'
+  match '/auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
+  delete 'sessions/destroy' => 'sessions#destroy'
+  get '/auth/failure' => 'sessions#failure' 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

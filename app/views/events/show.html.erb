@@ -1,3 +1,5 @@
+<%= paginate @events if @events %>
+
 <div id="event-show">
   <%= render partial: 'layouts/notice', locals: {type: @type} %>
   <div id="notice"></div>
@@ -5,7 +7,7 @@
   <h2 class="pull-left">
     <%= @event.name %>
   </h2>
-
+  
   <%= render 'layouts/thumbs' %>
 
   <div class="clearfix"></div>
@@ -47,8 +49,8 @@
   <hr/>
 
 
-  <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+  <% if admin? %> 
       <%= link_to 'Edit', edit_event_path(@event), :class => 'btn btn-link' %> |
-      <%= link_to 'Back', events_path, :class => 'btn btn-link' %>
   <% end %>
+<%= link_to 'Back', events_path, :class => 'btn btn-link' %>
 </div>

@@ -3,5 +3,6 @@ module GlobalConstants
   GENERIC_ERROR_MSG = 'Something went wrong. We are working on it'
   EVENT_IMAGES_PATH = Rails.public_path.join('event_images')
 
-  ADMIN = 'intuit01'
+  # !!!! Important Keep all the below emails in lower case only !!!!
+  ADMIN_EMAILS = ['nitin_pasumarthy@intuit.com'] #TODO Better Authorization
 end

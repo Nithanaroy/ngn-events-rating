@@ -1,3 +1,5 @@
+<%= render :partial => 'layouts/notice' %>
+
 <div class="page-header">
   <% unless params[:name].nil? %>
       <h3>Search Result: Found <%= @events.total_count %> event(s)</h3>
@@ -18,7 +20,7 @@
     <th><%= sort_link @search, :from %></th>
     <th><%= sort_link @search, :to %></th>
     <th><%= sort_link @search, :going, '# Going' %></th>
-    <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+    <% if admin? %>
         <th></th>
         <th></th>
     <% end %>
@@ -34,7 +36,7 @@
         <td><%= event.from.to_formatted_s(:date_time_weekday) %></td>
         <td><%= event.to.to_formatted_s(:date_time_weekday) %></td>
         <td><%= event.going if event.going > 0 %></td>
-        <% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+        <% if admin? %>
             <td><%= link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" %></td>
             <td><%= link_to 'Destroy', event, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-danger" %></td>
         <% end %>
@@ -45,6 +47,6 @@
 
 <br/>
 
-<% if is_logged_in? %>  <!-- TODO: remove these lines after actual validation -->
+<% if admin? %>
     <%= link_to 'New Event', new_event_path, :class => "btn btn-success" %>
 <% end %>

@@ -1,8 +1,9 @@
 require 'exceptions'
 
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, only: [:edit, :new]
+  before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :check_if_admin, only: [:edit, :new]
+  before_action :authenticate, only: [:going]
 
   def welcome
     render :file => "#{Rails.root}/public/welcome.html"
@@ -25,7 +26,7 @@ class EventsController < ApplicationController
 
     #@search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as ra').group(:event_id).search(params[:q])
     #puts "Search Sorts #{@search.sorts}"
-    @events = @search.result(:distinct => true).page(params[:page]).per(2)
+    @events = @search.result(:distinct => true).page(params[:page]).per(10)
     if (params[:q].nil?)
       @events = @events.order(created_at: :desc)
     elsif (params[:q] and params[:q][:s].index(/going (asc|desc)/)) #TODO Make Ransack do this for associated table
@@ -36,6 +37,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    params[:page] = Event.where("id < ?", params[:id]).count + 1 unless params[:page]
+    @events = Event.order(:id).page(params[:page]).per(1)
+    @event = @events.first
+    puts "Checking Pagination #{@events.to_yaml}"
   end
 
   # GET /events/new
@@ -82,14 +87,13 @@ class EventsController < ApplicationController
   end
 
   def going
-    event = Event.find(params[:id])
-    event.ratings << EventsRatings.new(:going => params[:going])
-    if event.save!
-      flash[:notice] = 'Saved!'
+    event = EventsRatings.update_or_create_by_event_and_user(Event.find(params[:id]), current_user, {:going => params[:going]})
+    if event
+      flash[:notice] = 'Thanks for voting!'
       render :partial => 'layouts/notice', locals: {type: 'success'}
     else
       flash[:notice] = 'Could not save. Please try again!'
-      render :partial => 'layouts/notice', locals: {type: 'error'}
+      render :partial => 'layouts/notice', locals: {type: 'danger'}
     end
   end
 
@@ -105,7 +109,16 @@ class EventsController < ApplicationController
   end
 
   def authenticate
-    unless is_logged_in?
+    unless signed_in?
+      # flash[:notice] = 'You have to sign in to perform this'
+      render :text => "You have to sign in to perform this", :status => :unauthorized
+      # raise 'You have to sign in to perform this'
+      # render :partial => 'layouts/notice', locals: {type: 'danger'}
+    end
+  end
+
+  def check_if_admin
+    unless admin?
       flash[:error] = 'YOU DONT HAVE PERMISSIONS TO ACCESS THIS PAGE!'
       render :file => '/public/401.html'
     end

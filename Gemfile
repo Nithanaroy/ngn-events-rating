@@ -41,6 +41,15 @@ gem 'ransack'
 # gem "oa-openid"
 # gem 'mongrel', '1.2.0.pre2'
 gem 'omniauth-openid', :git => 'git://github.com/intridea/omniauth-openid.git'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem "omniauth-google-oauth2"
+
+group :development do
+  gem 'better_errors'
+  # gem 'binding_of_caller'
+  gem 'meta_request'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

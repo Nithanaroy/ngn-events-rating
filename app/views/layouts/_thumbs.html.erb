@@ -1,8 +1,8 @@
 <div class="btn-group thumbs" style="margin-left: 20px; margin-top: 10px;">
-  <button type="button" class="btn btn-default btn-lg" title="Going!">
+  <button type="button" class="btn btn-default btn-lg <%= 'voted' if current_user and current_user.going?(@event.id) %>" title="Going!">
     <span class="glyphicon glyphicon-thumbs-up"></span>
   </button>
-  <button type="button" class="btn btn-default btn-lg" title="Not Going!">
+  <button type="button" class="btn btn-default btn-lg <%= 'voted' if current_user and current_user.going?(@event.id) == false %>" title="Not Going!">
     <span class="glyphicon glyphicon-thumbs-down"></span>
   </button>
 </div>
