@@ -37,3 +37,4 @@ config/initializers/secret_token.rb
 
 .idea/*
 /public/event_images/*
+public/event_images/*

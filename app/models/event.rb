@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
   end
 
   has_many :ratings, class_name: 'EventsRatings', foreign_key: 'event_id', dependent: :delete_all
+  belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
   #def rating
   #  ratings = self.ratings.map { |r| r.rating }

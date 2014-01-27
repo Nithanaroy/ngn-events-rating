@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :authorization
 	has_many :ratings, class_name: 'EventsRatings', foreign_key: 'user_id', dependent: :delete_all
+	has_many :events
 
 	def self.find_or_create_from_hash!(hash)
 		# puts hash.to_yaml # for debugging

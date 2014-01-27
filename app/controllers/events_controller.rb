@@ -152,7 +152,7 @@ class EventsController < ApplicationController
   end
 
   def create_helper
-    @event = Event.new(event_params)
+    @event = Event.new(event_params.merge({:user => current_user}))
     @event.transaction do
       respond_to do |format|
         if @event.save
