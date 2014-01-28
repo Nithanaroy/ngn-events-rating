@@ -4,5 +4,5 @@ module GlobalConstants
   EVENT_IMAGES_PATH = Rails.public_path.join('event_images')
 
   # !!!! Important Keep all the below emails in lower case only !!!!
-  ADMIN_EMAILS = ['nitin_pasumarthy@intuit.com', 'akshatha.udupa1@gmail.com'] #TODO Better Authorization
+  ADMIN_EMAILS = ['nitin_pasumarthy@intuit.com', 'akshatha.udupa1@gmail.com', 'bibhakar.nitk@gmail.com'] #TODO Better Authorization
 end
