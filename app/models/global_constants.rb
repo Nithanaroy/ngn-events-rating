@@ -5,5 +5,5 @@ module GlobalConstants
 
   # !!!! Important Keep all the below emails in lower case only !!!!
   ADMIN_EMAILS = ['nitin_pasumarthy@intuit.com', 'akshatha.udupa1@gmail.com', 'bibhakar.nitk@gmail.com', 
-  				'nithanaroy@gmail.com'] #TODO Better Authorization
+  				'nithanaroy@gmail.com', 'zubin.sethna07@gmail.com'] #TODO Better Authorization
 end
