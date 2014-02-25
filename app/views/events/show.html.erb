@@ -14,15 +14,7 @@
 
   <div class="media">
 
-    <% if @event.image_url %>
-        <div class="pull-left" id="theater">
-          <a href="<%= @event.image_url %>" target="_blank">
-            <img src="<%= @event.image_url %>?<%= Time.now.to_i %>"
-                 alt="<%= @event.name.upcase %>"
-                 class="media-object img-thumbnail img-responsive " style="max-width: 400px;"/>
-          </a>
-        </div>
-    <% end %>
+    <%= render partial: 'layouts/event_image', locals: {event: @event, max_width: '400px'} %>
 
     <div class="media-body">
       <h4 class="media-heading">Details</h4>

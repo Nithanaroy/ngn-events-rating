@@ -1,0 +1,49 @@
+<div class="page-header">
+    <h1>Coming up next! <small><a href='events?q%5Bs%5D=from+desc'>view all</a></small></h1>
+</div>
+<div class="jumbotron">
+    <h2><%= @coming_up.first.name %></h2>
+    <p>On <%= @coming_up.first.from.to_formatted_s(:date_time_weekday) %></p>
+    <p>At <%= @coming_up.first.place %></p>
+    <p><%= link_to 'Learn more', @coming_up.first, :class => 'btn btn-primary btn-lg' %></p>
+</div>
+
+<div class="page-header">
+    <h1>Coming up! <small><a href='events?q%5Bs%5D=from+desc'>view all</a></small></h1>
+</div>
+<div class="row">
+<% @coming_up[1..-1].each do |event| %>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <!-- <img data-src="holder.js/300x200" alt="..."> -->
+	  <%= render partial: 'layouts/event_image', locals: {event: event} %>
+	  <div class='clearfix'></div>
+      <div class="caption">
+        <h4 class='center'><%= link_to event.name, event %></h4>
+        <!-- <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<div class="page-header">
+    <h1>Recently added! <small><a href='events?q%5Bs%5D=created_at+desc'>view all</a></small></h1>
+</div>
+<div class="row">
+<% @recently_added.each do |event| %>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <!-- <img data-src="holder.js/300x200" alt="..."> -->
+	  <%= render partial: 'layouts/event_image', locals: {event: event} %>
+      <div class='clearfix'></div>
+      <div class="caption">
+        <h4 class='center'><%= link_to event.name, event %></h4>
+        <!-- <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

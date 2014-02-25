@@ -61,3 +61,7 @@ a.auth_provider:hover {
     margin-top: 0;
     margin-bottom: 5px;
 }
+
+.center {
+    text-align: center;
+}

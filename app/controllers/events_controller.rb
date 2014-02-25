@@ -5,10 +5,6 @@ class EventsController < ApplicationController
   before_action :check_if_admin, only: [:edit, :new]
   before_action :authenticate, only: [:going]
 
-  def welcome
-    render :file => "#{Rails.root}/public/welcome.html"
-  end
-
   # GET /events
   # GET /events.json
   def index
@@ -26,7 +22,7 @@ class EventsController < ApplicationController
 
     #@search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as ra').group(:event_id).search(params[:q])
     #puts "Search Sorts #{@search.sorts}"
-    @events = @search.result(:distinct => true).page(params[:page]).per(10)
+    @events = @search.result(:distinct => true).page(params[:page]).per(5)
     if (params[:q].nil?)
       @events = @events.order(created_at: :desc)
     elsif (params[:q] and params[:q][:s].index(/going (asc|desc)/)) #TODO Make Ransack do this for associated table

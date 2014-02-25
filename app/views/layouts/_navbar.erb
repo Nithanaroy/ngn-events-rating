@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">Events @ INTUIT </a>
+    <a class="navbar-brand" href="/">NGN @ INTUIT </a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,9 +15,7 @@
     <ul class="nav navbar-nav">
       <!--<li class="active"><a href="#">We Care <span class="badge">42</span></a></li>-->
       <!--<li><a href="#">NGN <span class="badge">66</span></a></li>-->
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Facebook</a></li>
-      <li><a href="#">Google +</a></li>
+      
       <!--<li class="dropdown">-->
         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social <b class="caret"></b></a>-->
         <!--<ul class="dropdown-menu">-->
@@ -26,6 +24,7 @@
           <!--<li><a href="#">Google +</a></li>-->
         <!--</ul>-->
       <!--</li>-->
+      <li <%= "class=active" if params[:controller] == 'events' %>><a href="/events">All Events</a></li>
     </ul>
     <form class="navbar-form navbar-right" role="search" action="/events">
       <div class="form-group">
