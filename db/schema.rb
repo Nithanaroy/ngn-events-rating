@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126173737) do
+ActiveRecord::Schema.define(version: 20140225140223) do
 
   create_table "authorizations", force: true do |t|
     t.string   "provider"
@@ -22,14 +22,15 @@ ActiveRecord::Schema.define(version: 20140126173737) do
   end
 
   create_table "events", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                      null: false
     t.text     "details"
-    t.string   "place",      null: false
-    t.datetime "from",       null: false
-    t.datetime "to",         null: false
+    t.string   "place",                     null: false
+    t.datetime "from",                      null: false
+    t.datetime "to",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id",    null: false
+    t.integer  "user_id",                   null: false
+    t.boolean  "show",       default: true, null: false
   end
 
   create_table "events_ratings", id: false, force: true do |t|
@@ -39,6 +40,13 @@ ActiveRecord::Schema.define(version: 20140126173737) do
     t.datetime "updated_at"
     t.boolean  "going"
     t.integer  "user_id",    null: false
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

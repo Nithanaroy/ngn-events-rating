@@ -22,6 +22,10 @@ class Event < ActiveRecord::Base
   #  (ratings.sum / Float(ratings.size)).round(1)
   #end
 
+  def destroy(*records)
+    self.update_attributes(:show => false)
+  end
+
   def delete_image
     begin
       File.delete(GlobalConstants::EVENT_IMAGES_PATH.join(self.id.to_s))

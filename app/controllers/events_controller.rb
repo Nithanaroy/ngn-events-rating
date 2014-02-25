@@ -2,6 +2,7 @@ require 'exceptions'
 
 class EventsController < ApplicationController
   before_action :set_event, only: [:edit, :update, :destroy]
+  before_action :check_if_visible, except: [:new, :create, :index]
   before_action :check_if_admin, only: [:edit, :new]
   before_action :authenticate, only: [:going]
 
@@ -9,6 +10,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     events = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'COUNT(going) as going').group(:id)
+    events = events.where(:show => true)
     events = events.where('name LIKE ?', "%#{params[:name]}%") if params[:name]
     @search = events.search(params[:q])
     #@search = Event.joins('LEFT OUTER JOIN events_ratings ON events.id = events_ratings.event_id').select('events.*', 'AVG(rating) as rating').group(:id).search(params[:q])
@@ -116,6 +118,15 @@ class EventsController < ApplicationController
   def check_if_admin
     unless admin?
       flash[:error] = 'YOU DONT HAVE PERMISSIONS TO ACCESS THIS PAGE!'
+      render :file => '/public/401.html'
+    end
+  end
+
+  # Checks if the current event is visible or deleted (=> invisible)
+  def check_if_visible
+    event = Event.find(params[:id])
+    unless event.show
+      # flash[:error] = 'YOU DONT HAVE PERMISSIONS TO ACCESS THIS PAGE!'
       render :file => '/public/401.html'
     end
   end
