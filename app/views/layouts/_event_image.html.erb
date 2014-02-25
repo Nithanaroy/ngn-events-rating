@@ -1,12 +1,10 @@
-<% if event.image_url %>
-    <div class="pull-left" id="theater">
-      <a href="<%= event.image_url %>" target="_blank">
-        <img src="<%= event.image_url %>?<%= Time.now.to_i %>"
-             alt="<%= event.name.upcase %>"
-             class="media-object img-thumbnail img-responsive " 
-             style="max-width: <%= max_width if defined?(max_width) %>"
-             />
-      </a>
-    </div>
-    <!-- <div class='clearfix'></div> -->
-<% end %>
+<div class="pull-left">
+  <a href="<%= event.image_url || '#' %>" target="_blank">
+    <img src="<%= event.image_url || '/images/default_event_image.jpg' %>?<%= Time.now.to_i %>"
+         alt="<%= event.name.upcase %>"
+         class="media-object img-thumbnail img-responsive " 
+         style="max-width: <%= max_width if defined?(max_width) %>"
+         />
+  </a>
+</div>
+<!-- <div class='clearfix'></div> -->

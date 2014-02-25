@@ -1,4 +1,8 @@
 class Event < ActiveRecord::Base
+
+  default_scope :conditions => {:show => true} # Only shows events which are not hidden
+  # When we want to get all events without `show` condition: http://stackoverflow.com/questions/3605914/default-conditions-for-rails-models
+
   before_destroy :delete_image
 
   validates :name, presence: {:message => ': can\'t be blank'}
