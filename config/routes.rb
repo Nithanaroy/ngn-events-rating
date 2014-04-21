@@ -1,6 +1,10 @@
 Events::Application.routes.draw do
   resources :events
   resources :sessions
+
+  get 'treasurehunt/6hO0nA31v' => 'events#treasurehunt'
+  get 'treasurehunt/uQ9okO25zW' => 'events#treasurehunteq'
+
   post 'events/:id/rating' => 'events#add_rating'
   post 'events/:id/going' => 'events#going'
   match '/auth/:provider/callback' => 'sessions#create', :via => [:get, :post]
