@@ -4,6 +4,9 @@ Events::Application.routes.draw do
 
   get 'treasurehunt/6hO0nA31v' => 'events#treasurehunt'
   get 'treasurehunt/uQ9okO25zW' => 'events#treasurehunteq'
+  get 'treasurehunt/G6iwp8X21' => 'events#treasurehuntwr1'
+  get 'treasurehunt/62Ilqcah8p' => 'events#treasurehuntwr2'
+  get 'treasurehunt/A7l3gx4Hs' => 'events#treasurehuntwr3'
 
   post 'events/:id/rating' => 'events#add_rating'
   post 'events/:id/going' => 'events#going'
